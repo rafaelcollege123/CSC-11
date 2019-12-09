@@ -43,7 +43,9 @@ light1:
 	mov r0, #FRST_PIN
 	mov r1, #HIGH
 	bl digitalWrite
+//Reinitialize Counter for Button Check
 	mov r6, #0
+	
 //Check for Button, Looping for continous checks , and delaying.
 	
 button_checkON1:
@@ -65,7 +67,7 @@ button_checkON1:
 	mov r1, #LOW
 	bl digitalWrite
 	
-	//Set Loop Counter for delay
+//Re-initialize Loop Counter for delay
 	mov r6, #0
 	
 button_checkOFF1:
@@ -76,10 +78,12 @@ button_checkOFF1:
 	cmp r0, #HIGH
 	beq game_over
 	
-	//Delay to keep light on.
+	//Delay to keep light on checks every millisecond.
 	ldr r0, =#1
 	bl delay
-	
+
+//Checks  button 800 times each with a millisecond of delay
+//To keep light on for 800 milliseconds
 	cmp r6, #800
 	add r6, #1
 	blt button_checkOFF1
